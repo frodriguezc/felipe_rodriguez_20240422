@@ -19,6 +19,7 @@ class PropertyDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_property_detail)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val property = intent.getParcelableExtra<Property>("property")
 
@@ -38,9 +39,13 @@ class PropertyDetailActivity : AppCompatActivity() {
             if (property != null) {
                 append(property.price)
             }
-    }
+        }
         if (property != null) {
             findViewById<TextView>(R.id.type_text_view).text = property.type
         }
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

@@ -22,9 +22,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val properties = mutableListOf(
-            Property(1, R.raw.casa1, 6000, "Location 1", "Venta"),
-            Property(2, R.raw.casa2, 300, "Location 2", "Arriendo"),
-            Property(3, R.raw.casa3, 7000, "Location 2", "Venta")
+            Property(1, R.raw.casa1, 6000, "Santiago", "Venta"),
+            Property(2, R.raw.casa2, 300, "Valdivia", "Arriendo"),
+            Property(3, R.raw.casa3, 7000, "La Serena", "Venta")
 
         )
 
