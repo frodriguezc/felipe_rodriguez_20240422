@@ -26,22 +26,28 @@ class PropertyDetailActivity : AppCompatActivity() {
         if (property != null) {
             findViewById<TextView>(R.id.location_text_view).text = buildString {
                 append("Ubicacion:  ")
-                if (property != null) {
+                if (property.location != null) {
                     append(property.location)
                 } else {
                     append("No informada")
                 }
             }
-
-        }
-        findViewById<TextView>(R.id.price_text_view).text = buildString {
-            append("Valor: UF ")
-            if (property != null) {
-                append(property.price)
+            findViewById<TextView>(R.id.price_text_view).text = buildString {
+                if (property.price != null) {
+                    append("Valor: UF ")
+                    append(property.price)
+                } else {
+                    append("Valor no declarado, consulte directamente ")
+                }
             }
-        }
-        if (property != null) {
-            findViewById<TextView>(R.id.type_text_view).text = property.type
+            findViewById<TextView>(R.id.type_text_view).text = buildString {
+                append("Categoría:  ")
+                if (property.type != null) {
+                    append(property.type)
+                } else {
+                    append("No declarada, consulte directamente ")
+                }
+            }
         }
     }
     override fun onSupportNavigateUp(): Boolean {
