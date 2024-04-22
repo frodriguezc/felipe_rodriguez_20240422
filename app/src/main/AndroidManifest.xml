@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
@@ -11,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.Felipe_rodriguez_20240422"
-        tools:targetApi="33">
+        >
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -23,7 +22,8 @@
         </activity>
         <activity
             android:name=".PropertyDetailActivity"
-            android:exported="false" />
+            android:parentActivityName=".MainActivity"
+             />
     </application>
 
 </manifest>
