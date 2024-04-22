@@ -14,14 +14,14 @@ class PropertyAdapter(
 
     context: Context,
     private val resource: Int,
-    private val properties: List<Property>
+    properties: List<Property>
 ) : ArrayAdapter<Property>(context, resource, properties) {
 
     private val mutableProperties = properties.toMutableList()
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 //        val property = getItem(position)!!
-        val property = getItem(position) ?: return super.getView(position, convertView, parent)
-
+//        val property = getItem(position) ?: return super.getView(position, convertView, parent)
+        val property = mutableProperties[position]
 
         val view = convertView ?: LayoutInflater.from(context).inflate(resource, parent, false)
 

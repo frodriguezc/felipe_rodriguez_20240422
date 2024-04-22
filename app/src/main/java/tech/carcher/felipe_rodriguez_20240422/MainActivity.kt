@@ -2,6 +2,7 @@ package tech.carcher.felipe_rodriguez_20240422
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
@@ -14,10 +15,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var listView: ListView
     private lateinit var adapter: PropertyAdapter
-//    private var properties = mutableListOf<Property>(Property(1, R.raw.casa1, 6000, "Santiago", "Venta"),
-//        Property(2, R.raw.casa2, 300, "Valdivia", "Arriendo"),
-//        Property(3, R.raw.casa3, 7000, "La Serena", "Venta")
-//    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,10 +43,21 @@ class MainActivity : AppCompatActivity() {
         menu.add(0, 0, 0, "Eliminar")
     }
 
+//    override fun onContextItemSelected(item: MenuItem): Boolean {
+//        val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
+//        if (item.title == "Eliminar") {
+//            adapter.remove(info.position)
+//            return true
+//        }
+//        return super.onContextItemSelected(item)
+//    }
+
     override fun onContextItemSelected(item: MenuItem): Boolean {
         val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
+        Log.d("ContextMenu", "Position to remove: ${info.position}, List size before: ${adapter.count}")
         if (item.title == "Eliminar") {
             adapter.remove(info.position)
+            Log.d("ContextMenu", "List size after: ${adapter.count}")
             return true
         }
         return super.onContextItemSelected(item)
