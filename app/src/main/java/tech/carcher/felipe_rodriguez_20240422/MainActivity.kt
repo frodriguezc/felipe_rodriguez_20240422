@@ -1,6 +1,5 @@
 package tech.carcher.felipe_rodriguez_20240422
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.ContextMenu
@@ -35,7 +34,21 @@ class MainActivity : AppCompatActivity() {
         listView.adapter = adapter
 
         registerForContextMenu(listView)
+
+        listView.setOnItemClickListener { _, _, position, _ ->
+            Log.d("FRC", "posicion: $position")
+            val property = adapter.getItem(position)
+            if (property != null) {
+                Log.d("FRC", "propiedad: ${property.id}")
+                val intent = PropertyDetailActivity.newIntent(this, property)
+                startActivity(intent)
+            } else {
+                Log.d("FRC", "propiedad null")
+            }
+        }
+
     }
+
 
     override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
         super.onCreateContextMenu(menu, v, menuInfo)
@@ -54,10 +67,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
         val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
-        Log.d("ContextMenu", "Position to remove: ${info.position}, List size before: ${adapter.count}")
+        Log.d("FRC", "posicion a eliminar: ${info.position}, tamanho lista previo: ${adapter.count}")
         if (item.title == "Eliminar") {
             adapter.remove(info.position)
-            Log.d("ContextMenu", "List size after: ${adapter.count}")
+            Log.d("FRC", "tamanho lista post: ${adapter.count}")
             return true
         }
         return super.onContextItemSelected(item)
