@@ -11,13 +11,17 @@ import android.view.View
 import android.view.ViewGroup
 
 class PropertyAdapter(
+
     context: Context,
     private val resource: Int,
     private val properties: List<Property>
 ) : ArrayAdapter<Property>(context, resource, properties) {
 
+    private val mutableProperties = properties.toMutableList()
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val property = getItem(position)!!
+//        val property = getItem(position)!!
+        val property = getItem(position) ?: return super.getView(position, convertView, parent)
+
 
         val view = convertView ?: LayoutInflater.from(context).inflate(resource, parent, false)
 
@@ -29,20 +33,16 @@ class PropertyAdapter(
             append("UF ")
             append(property.price)
         }
-
-        view.setOnCreateContextMenuListener { menu, v, _ ->
-            menu.add(Menu.NONE, position, Menu.NONE, "Eliminar").setOnMenuItemClickListener {
-                remove(property)
-                notifyDataSetChanged()
-                true
-            }
-        }
-
-        imageView.setOnClickListener {
-            val intent = PropertyDetailActivity.newIntent(context, property)
-            context.startActivity(intent)
-        }
-
         return view
+    }
+
+//    fun remove(property: Property) {
+//        properties.drop(property.id)
+//        notifyDataSetChanged()
+//    }
+
+    fun remove(position: Int) {
+        mutableProperties.removeAt(position)
+        notifyDataSetChanged()
     }
 }

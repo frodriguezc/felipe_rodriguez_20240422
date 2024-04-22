@@ -14,7 +14,10 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var listView: ListView
     private lateinit var adapter: PropertyAdapter
-    private var selectedProperty: Property? = null
+//    private var properties = mutableListOf<Property>(Property(1, R.raw.casa1, 6000, "Santiago", "Venta"),
+//        Property(2, R.raw.casa2, 300, "Valdivia", "Arriendo"),
+//        Property(3, R.raw.casa3, 7000, "La Serena", "Venta")
+//    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +28,6 @@ class MainActivity : AppCompatActivity() {
             Property(1, R.raw.casa1, 6000, "Santiago", "Venta"),
             Property(2, R.raw.casa2, 300, "Valdivia", "Arriendo"),
             Property(3, R.raw.casa3, 7000, "La Serena", "Venta")
-
         )
 
         listView = findViewById(R.id.list_view)
@@ -33,39 +35,20 @@ class MainActivity : AppCompatActivity() {
         listView.adapter = adapter
 
         registerForContextMenu(listView)
-
-        listView.setOnItemClickListener { _, _, position, _ ->
-            // Obtener la propiedad seleccionada según la posición
-            val selectedProperty = adapter.getItem(position)
-
-            // Iniciar PropertyDetailActivity pasando la propiedad seleccionada
-            selectedProperty?.let {
-                val intent = Intent(this, PropertyDetailActivity::class.java).apply {
-                    putExtra("property", it)
-                }
-                startActivity(intent)
-            }
-        }
-
-
     }
+
     override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
         super.onCreateContextMenu(menu, v, menuInfo)
-        val info = menuInfo as AdapterView.AdapterContextMenuInfo
-        selectedProperty = adapter.getItem(info.position)
-        menu.add("Eliminar")
+        menu.setHeaderTitle("Acciones")
+        menu.add(0, 0, 0, "Eliminar")
     }
 
-    // Manejar la acción del menú contextual
     override fun onContextItemSelected(item: MenuItem): Boolean {
+        val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
         if (item.title == "Eliminar") {
-            selectedProperty?.let { property ->
-                adapter.remove(property)
-                adapter.notifyDataSetChanged()
-            }
+            adapter.remove(info.position)
+            return true
         }
         return super.onContextItemSelected(item)
     }
-
-
 }
