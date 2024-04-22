@@ -27,7 +27,10 @@ class MainActivity : AppCompatActivity() {
         val properties = mutableListOf(
             Property(1, R.raw.casa1, 6000, "Santiago", "Venta"),
             Property(2, R.raw.casa2, 300, "Valdivia", "Arriendo"),
-            Property(3, R.raw.casa3, 7000, "La Serena", "Venta")
+            Property(3, R.raw.casa3, 7000, "La Serena", "Venta"),
+            Property(4, R.raw.casa1, 8300, "Maitencillo", "Venta"),
+            Property(5, R.raw.casa2, 230, "Vitacura", "Arriendo"),
+            Property(6, R.raw.casa3, 9000, "La Pintana", "Venta")
         )
 
         listView = findViewById(R.id.list_view)
